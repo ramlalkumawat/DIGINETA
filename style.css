@@ -2447,3 +2447,458 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* ========================================================
+   LEADERSHIP & DIRECTOR PROFILE SECTION
+   ======================================================== */
+.director-section {
+  padding: 100px 0;
+  position: relative;
+  background: radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 20% 80%, rgba(255, 106, 0, 0.08) 0%, transparent 50%);
+}
+
+.director-card-wrapper {
+  position: relative;
+  background: radial-gradient(circle at 15% 25%, rgba(255, 122, 0, 0.12) 0%, rgba(26, 16, 50, 0.85) 100%);
+  border: 1px solid rgba(255, 122, 0, 0.35);
+  border-radius: var(--radius-xl);
+  padding: 48px 44px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 45px rgba(255, 106, 0, 0.12);
+  backdrop-filter: blur(16px);
+}
+
+.director-bg-glow {
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(255, 106, 0, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+.director-card-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 48px;
+  align-items: start;
+  position: relative;
+  z-index: 2;
+}
+
+/* Left Column / Image Card */
+.director-photo-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.director-image-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.director-img-container {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 122, 0, 0.45);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(255, 106, 0, 0.25);
+  background: #110924;
+}
+
+.director-img {
+  width: 100%;
+  height: 430px;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.director-img-container:hover .director-img {
+  transform: scale(1.04);
+}
+
+.director-badge-floating {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(11, 6, 23, 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 122, 0, 0.5);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ff9e2c;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.director-brand-stamp {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: rgba(11, 6, 23, 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.25;
+}
+
+.director-brand-stamp .stamp-sub {
+  font-size: 0.7rem;
+  color: #ffaa5e;
+  font-weight: 500;
+}
+
+/* Quick Contacts */
+.director-quick-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-director-wa {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff !important;
+  padding: 13px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-director-wa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+  filter: brightness(1.08);
+}
+
+.btn-director-call {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff !important;
+  padding: 12px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.25s ease;
+}
+
+.btn-director-call:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 122, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Right Column / Details */
+.director-details-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.director-name-block {
+  margin-bottom: 20px;
+}
+
+.director-role-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 122, 0, 0.12);
+  border: 1px solid rgba(255, 122, 0, 0.35);
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #ff9e2c;
+  margin-bottom: 12px;
+}
+
+.director-name {
+  font-size: 2.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.director-name .en-name {
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: #ff9e2c;
+  margin-left: 6px;
+}
+
+.director-designation {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  margin-top: 6px;
+}
+
+.director-designation strong {
+  color: #ffffff;
+}
+
+/* Quote Box */
+.director-quote-box {
+  position: relative;
+  background: rgba(139, 92, 246, 0.09);
+  border-left: 4px solid var(--orange-primary);
+  border-radius: 0 16px 16px 0;
+  padding: 22px 26px 20px 32px;
+  margin: 18px 0 24px 0;
+  backdrop-filter: blur(8px);
+}
+
+.director-quote-box .quote-mark {
+  position: absolute;
+  top: -8px;
+  left: 10px;
+  font-size: 3.5rem;
+  line-height: 1;
+  color: rgba(255, 122, 0, 0.25);
+  font-family: Georgia, serif;
+}
+
+.director-quote-box .quote-text {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #f1f5f9;
+}
+
+.director-quote-box .quote-author {
+  text-align: right;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffaa5e;
+  margin-top: 8px;
+}
+
+/* Expertise Grid */
+.director-expertise-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 14px;
+}
+
+.director-expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.exp-card {
+  display: flex;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.exp-card:hover {
+  background: rgba(255, 255, 255, 0.065);
+  border-color: rgba(255, 122, 0, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.exp-icon {
+  font-size: 1.55rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.exp-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.exp-desc {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  line-height: 1.45;
+}
+
+/* Stats Row */
+.director-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  background: rgba(11, 6, 23, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 24px;
+}
+
+.d-stat-item {
+  text-align: center;
+}
+
+.d-stat-val {
+  font-size: 1.75rem;
+  font-weight: 900;
+  font-family: var(--font-heading);
+  color: #ffffff;
+  line-height: 1.15;
+}
+
+.d-stat-item.highlight .d-stat-val {
+  color: #ff7a00;
+}
+
+.d-stat-lbl {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 4px;
+}
+
+/* Director CTA Bar */
+.director-cta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: linear-gradient(135deg, rgba(255, 106, 0, 0.14) 0%, rgba(139, 92, 246, 0.14) 100%);
+  border: 1px solid rgba(255, 122, 0, 0.35);
+  border-radius: 16px;
+  padding: 18px 22px;
+}
+
+.d-cta-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.d-cta-text strong {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.d-cta-text span {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+}
+
+/* Footer Director Mention */
+.footer-director-mention {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 122, 0, 0.28);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  color: #ffaa5e;
+}
+
+/* Responsive Media Queries for Director Section */
+@media (max-width: 992px) {
+  .director-card-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .director-photo-col {
+    max-width: 420px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .director-img {
+    height: 400px;
+  }
+
+  .director-cta-bar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .director-cta-bar .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .director-card-wrapper {
+    padding: 32px 20px;
+  }
+
+  .director-name {
+    font-size: 1.85rem;
+  }
+
+  .director-name .en-name {
+    font-size: 1.25rem;
+    display: block;
+    margin-left: 0;
+    margin-top: 2px;
+  }
+
+  .director-expertise-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .director-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .director-img {
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .director-name {
+    font-size: 1.6rem;
+  }
+
+  .director-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 14px 10px;
+  }
+
+  .d-stat-val {
+    font-size: 1.45rem;
+  }
+
+  .director-card-wrapper {
+    padding: 24px 14px;
+  }
+}
+
