@@ -4,15 +4,15 @@
    ======================================================== */
 
 :root {
-  /* Brand Colors */
-  --bg-primary: #0b0617;
-  --bg-secondary: #130b26;
-  --bg-tertiary: #1b1035;
-  --bg-card: rgba(26, 16, 50, 0.75);
-  --bg-card-hover: rgba(38, 24, 73, 0.9);
-  --bg-glass: rgba(255, 255, 255, 0.04);
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-accent: rgba(255, 122, 0, 0.35);
+  /* Brand Colors - Rich Modern Political Tech */
+  --bg-primary: #120826;
+  --bg-secondary: #190d35;
+  --bg-tertiary: #221248;
+  --bg-card: rgba(30, 16, 60, 0.82);
+  --bg-card-hover: rgba(44, 24, 86, 0.94);
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(255, 122, 0, 0.38);
 
   /* Primary Accent Gradients */
   --orange-primary: #ff6a00;
@@ -21,7 +21,7 @@
   --grad-orange: linear-gradient(135deg, #ff7a00 0%, #ff4500 100%);
   --grad-gold: linear-gradient(135deg, #fbb034 0%, #ffdd00 100%);
   --grad-hero-text: linear-gradient(135deg, #ffffff 30%, #ffaa5e 100%);
-  --grad-purple-navy: linear-gradient(180deg, #180d30 0%, #0c0818 100%);
+  --grad-purple-navy: linear-gradient(180deg, #1c0d38 0%, #120826 100%);
 
   /* Secondary Accents */
   --purple-accent: #8b5cf6;
@@ -78,6 +78,12 @@ html {
 body {
   font-family: var(--font-body);
   background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(ellipse 70% 40% at 0% 15%, rgba(139, 92, 246, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 40% at 100% 35%, rgba(255, 106, 0, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 50% 60%, rgba(139, 92, 246, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 0% 85%, rgba(255, 106, 0, 0.10) 0%, transparent 60%);
+  background-attachment: fixed;
   color: var(--text-muted);
   line-height: 1.65;
   overflow-x: hidden;
@@ -542,7 +548,7 @@ button {
   padding-top: calc(var(--header-height) + 40px);
   padding-bottom: 80px;
   overflow: hidden;
-  background: radial-gradient(circle at 50% 20%, #290d4a 0%, #0b0617 70%);
+  background: radial-gradient(circle at 50% 15%, #34125f 0%, #1a0c38 60%, #120826 100%);
 }
 
 .hero-bg-glow {
@@ -562,11 +568,11 @@ button {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 40px 40px;
-  mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 80%);
+  mask-image: linear-gradient(180deg, black 65%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, black 65%, transparent 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -1001,7 +1007,7 @@ button {
    ======================================================== */
 .marquee-ticker-section {
   width: 100%;
-  background: linear-gradient(90deg, #15092a 0%, #250d40 50%, #15092a 100%);
+  background: linear-gradient(90deg, #1c0c38 0%, #2f1254 50%, #1c0c38 100%);
   border-top: 1px solid rgba(255, 122, 0, 0.4);
   border-bottom: 1px solid rgba(255, 122, 0, 0.4);
   padding: 13px 0;
@@ -1018,19 +1024,19 @@ button {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 80px;
+  width: 36px;
   z-index: 3;
   pointer-events: none;
 }
 
 .marquee-ticker-section::before {
   left: 0;
-  background: linear-gradient(90deg, #0b0617 0%, transparent 100%);
+  background: linear-gradient(90deg, #1c0c38 0%, transparent 100%);
 }
 
 .marquee-ticker-section::after {
   right: 0;
-  background: linear-gradient(270deg, #0b0617 0%, transparent 100%);
+  background: linear-gradient(270deg, #1c0c38 0%, transparent 100%);
 }
 
 .marquee-ticker-wrap {
@@ -1093,7 +1099,7 @@ button {
    ======================================================== */
 .services-section {
   padding: 90px 0;
-  background: linear-gradient(180deg, #0b0617 0%, #150b28 100%);
+  background: linear-gradient(180deg, #120826 0%, #1b0e38 50%, #150a2c 100%);
   position: relative;
 }
 
@@ -1233,9 +1239,9 @@ button {
    ======================================================== */
 .chunav-setu-section {
   padding: 100px 0;
-  background: radial-gradient(circle at 70% 30%, #2b0b4b 0%, #0d061c 80%);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: radial-gradient(circle at 60% 30%, #360f5c 0%, #180b32 75%, #120826 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
 }
 
@@ -1599,7 +1605,7 @@ button {
    ======================================================== */
 .portfolio-section {
   padding: 90px 0;
-  background: linear-gradient(180deg, #150b28 0%, #0d061a 100%);
+  background: linear-gradient(180deg, #150a2c 0%, #1d0d3b 50%, #130828 100%);
   position: relative;
   overflow: hidden;
 }
@@ -1885,7 +1891,7 @@ button {
    ======================================================== */
 .how-we-work-section {
   padding: 100px 0;
-  background: radial-gradient(circle at 50% 10%, #1e0f38 0%, #0b0617 70%);
+  background: radial-gradient(circle at 50% 15%, #2a124c 0%, #14092b 75%);
   position: relative;
 }
 
@@ -1950,7 +1956,7 @@ button {
    ======================================================== */
 .why-us-section {
   padding: 100px 0;
-  background: #0d061b;
+  background: linear-gradient(180deg, #14092b 0%, #1a0d36 50%, #130828 100%);
   position: relative;
 }
 
@@ -2066,7 +2072,7 @@ button {
    ======================================================== */
 .contact-section {
   padding: 100px 0;
-  background: linear-gradient(180deg, #0d061b 0%, #17092b 100%);
+  background: linear-gradient(180deg, #130828 0%, #1f0d3e 50%, #14082c 100%);
   position: relative;
 }
 
@@ -2224,7 +2230,7 @@ button {
    9. FOOTER
    ======================================================== */
 .site-footer {
-  background: #080311;
+  background: #0f0720;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 70px 0 100px;
   color: var(--text-dim);
@@ -2358,15 +2364,15 @@ button {
   left: 0;
   width: 100%;
   height: var(--mobile-bar-height);
-  background: rgba(14, 7, 28, 0.96);
+  background: rgba(18, 9, 36, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(255, 122, 0, 0.3);
+  border-top: 1px solid rgba(255, 122, 0, 0.35);
   z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 16px;
+  padding: 8px 14px;
   gap: 10px;
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
 }
@@ -2678,7 +2684,12 @@ button {
   }
 
   body {
-    padding-bottom: var(--mobile-bar-height);
+    padding-bottom: calc(var(--mobile-bar-height) + env(safe-area-inset-bottom, 10px));
+  }
+
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   .site-header {
@@ -2686,8 +2697,8 @@ button {
   }
 
   .header-container {
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   .brand-name {
@@ -2697,6 +2708,11 @@ button {
   /* Marquee ticker on mobile */
   .marquee-ticker-section {
     padding: 10px 0;
+  }
+
+  .marquee-ticker-section::before,
+  .marquee-ticker-section::after {
+    width: 16px;
   }
 
   .m-item {
@@ -3044,8 +3060,9 @@ button {
 .director-section {
   padding: 100px 0;
   position: relative;
-  background: radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 20% 80%, rgba(255, 106, 0, 0.08) 0%, transparent 50%);
+  background: radial-gradient(circle at 85% 25%, rgba(139, 92, 246, 0.16) 0%, transparent 60%),
+              radial-gradient(circle at 15% 75%, rgba(255, 106, 0, 0.14) 0%, transparent 60%),
+              linear-gradient(180deg, #14082c 0%, #1c0d3a 50%, #120826 100%);
 }
 
 .director-card-wrapper {
@@ -3474,6 +3491,11 @@ button {
 }
 
 @media (max-width: 480px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   .director-name {
     font-size: 1.6rem;
   }
@@ -3488,7 +3510,8 @@ button {
   }
 
   .director-card-wrapper {
-    padding: 24px 14px;
+    padding: 20px 12px;
+    border-radius: 18px;
   }
 }
 
