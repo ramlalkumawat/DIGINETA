@@ -1247,9 +1247,18 @@ button {
 
 .chunav-setu-layout {
   display: grid;
-  grid-template-columns: 1.1fr 1.3fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
   gap: 48px;
   align-items: center;
+  width: 100%;
+  max-width: 100%;
+}
+
+.chunav-info,
+.chunav-ui-demo {
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
 }
 
 .setu-badge {
@@ -1264,14 +1273,16 @@ button {
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--orange-light);
-  letter-spacing: 1.2px;
+  letter-spacing: 1px;
   margin-bottom: 18px;
+  max-width: 100%;
 }
 
 .setu-main-heading {
   font-size: clamp(2.2rem, 4vw, 3.2rem);
   line-height: 1.15;
   margin-bottom: 18px;
+  word-break: break-word;
 }
 
 .setu-lead-text {
@@ -1279,6 +1290,7 @@ button {
   color: var(--text-muted);
   line-height: 1.7;
   margin-bottom: 30px;
+  word-break: break-word;
 }
 
 .setu-features-list {
@@ -1286,6 +1298,7 @@ button {
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   margin-bottom: 36px;
+  width: 100%;
 }
 
 .setu-feat-card {
@@ -1296,6 +1309,8 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   padding: 16px 14px;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .feat-check-icon {
@@ -1312,6 +1327,11 @@ button {
   flex-shrink: 0;
 }
 
+.feat-body {
+  min-width: 0;
+  flex: 1;
+}
+
 .feat-title {
   font-size: 0.98rem;
   font-weight: 700;
@@ -1324,6 +1344,7 @@ button {
   color: var(--text-dim);
   line-height: 1.4;
   margin-bottom: 0;
+  word-break: break-word;
 }
 
 .setu-action-row {
@@ -2701,8 +2722,8 @@ button {
   }
 
   .container {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 
   .site-header {
@@ -2710,8 +2731,8 @@ button {
   }
 
   .header-container {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 
   .brand-name {
@@ -2836,23 +2857,166 @@ button {
     padding: 24px 20px;
   }
 
-  /* Chunav Setu SaaS */
+  /* Chunav Setu SaaS Section Mobile */
   .chunav-setu-section {
-    padding: 60px 0;
+    padding: 50px 0;
+    overflow-x: clip;
   }
 
   .chunav-setu-layout {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .chunav-info,
+  .chunav-ui-demo {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .setu-badge {
+    padding: 5px 12px;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+    display: inline-flex;
+    text-align: left;
+  }
+
+  .setu-main-heading {
+    font-size: clamp(1.65rem, 6.5vw, 2.15rem);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    word-break: break-word;
+  }
+
+  .setu-lead-text {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: var(--text-muted);
+    word-break: break-word;
   }
 
   .setu-features-list {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    margin-bottom: 22px;
+    width: 100%;
   }
 
+  .setu-feat-card {
+    padding: 13px 12px;
+    gap: 10px;
+    border-radius: 12px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .feat-check-icon {
+    width: 22px;
+    height: 22px;
+    font-size: 0.75rem;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  .feat-body {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .feat-title {
+    font-size: 0.92rem;
+    margin-bottom: 2px;
+    color: #ffffff;
+  }
+
+  .feat-desc {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--text-dim);
+    word-break: break-word;
+  }
+
+  .setu-action-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .setu-action-row .btn {
+    width: 100%;
+    justify-content: center;
+    height: 50px;
+    font-size: 0.98rem;
+    border-radius: 12px;
+  }
+
+  .demo-support-text {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+
+  /* SaaS Mockup Window Mobile */
   .saas-window {
-    border-radius: var(--radius-md);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  }
+
+  .saas-header {
+    padding: 10px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .saas-breadcrumbs {
+    flex-wrap: wrap;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .saas-logo-mini {
+    width: 22px;
+    height: 22px;
+    font-size: 0.65rem;
+  }
+
+  .saas-env {
+    font-size: 0.78rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .saas-demo-tag {
+    font-size: 0.6rem;
+    padding: 2px 5px;
+  }
+
+  .saas-actions {
+    margin-left: auto;
+    gap: 5px;
+  }
+
+  .saas-status-text {
+    font-size: 0.7rem;
   }
 
   .saas-tabs-bar {
@@ -2860,6 +3024,14 @@ button {
     align-items: flex-start;
     gap: 8px;
     padding: 10px 12px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .tabs-label {
+    font-size: 0.74rem;
   }
 
   .filter-buttons {
@@ -2869,8 +3041,10 @@ button {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     width: 100%;
+    max-width: 100%;
     gap: 6px;
     padding-bottom: 4px;
+    box-sizing: border-box;
   }
 
   .filter-buttons::-webkit-scrollbar {
@@ -2880,39 +3054,141 @@ button {
   .filter-btn {
     flex-shrink: 0;
     white-space: nowrap;
-    font-size: 0.78rem;
-    padding: 6px 12px;
+    font-size: 0.74rem;
+    padding: 5px 10px;
+    border-radius: 6px;
+  }
+
+  .saas-body {
+    padding: 12px 10px;
+    gap: 12px;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
   .saas-stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    padding: 10px 12px;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .stat-card {
-    padding: 10px;
+    padding: 10px 8px;
+    min-width: 0;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  .st-label {
+    font-size: 0.68rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .st-val {
-    font-size: 1.25rem;
+    font-size: 1.18rem;
+    margin: 3px 0;
+    line-height: 1.15;
+  }
+
+  .st-meta {
+    font-size: 0.65rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .saas-panel-row {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .saas-panel {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-size: 0.76rem;
+    margin-bottom: 8px;
+  }
+
+  .panel-header-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .table-swipe-pill {
+    font-size: 0.62rem;
+    background: rgba(255, 122, 0, 0.18);
+    color: #ff9e2c;
+    border: 1px solid rgba(255, 122, 0, 0.35);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .panel-badge {
+    font-size: 0.65rem;
   }
 
   .booth-table-responsive {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     width: 100%;
+    max-width: 100%;
     border-radius: 8px;
-    margin: 8px 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 6px 0;
+    box-sizing: border-box;
   }
 
   .saas-table {
-    min-width: 480px;
-    font-size: 0.78rem;
+    min-width: 440px;
+    width: 100%;
+    font-size: 0.74rem;
   }
 
   .saas-table th, .saas-table td {
     padding: 8px 10px;
+    white-space: nowrap;
+  }
+
+  .saas-footer-status {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .sync-info {
+    font-size: 0.72rem;
+    flex-wrap: wrap;
+  }
+
+  .demo-note {
+    font-size: 0.67rem;
+    line-height: 1.35;
   }
 
   /* Portfolio Carousel on Mobile */
@@ -3029,10 +3305,17 @@ button {
 
   /* Scroll To Top on Mobile */
   .scroll-to-top-btn {
-    bottom: calc(var(--mobile-bar-height) + 14px);
-    right: 14px;
-    width: 44px;
-    height: 44px;
+    bottom: calc(var(--mobile-bar-height) + 12px);
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    z-index: 950;
+    box-shadow: 0 4px 14px rgba(255, 106, 0, 0.4);
+  }
+
+  .scroll-to-top-btn .top-icon {
+    width: 18px;
+    height: 18px;
   }
 
   .lightbox-nav-btn.prev { left: 4px; }
@@ -3059,8 +3342,17 @@ button {
   .mockup-kpi-grid .kpi-card:last-child {
     grid-column: auto;
   }
+  .setu-main-heading {
+    font-size: 1.55rem;
+  }
+  .setu-feat-card {
+    padding: 10px 8px;
+  }
   .saas-stats-grid {
     grid-template-columns: 1fr;
+  }
+  .st-label, .st-meta {
+    white-space: normal;
   }
   .why-pillars-strip {
     grid-template-columns: repeat(2, 1fr);
@@ -3505,8 +3797,8 @@ button {
 
 @media (max-width: 480px) {
   .container {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 
   .director-name {

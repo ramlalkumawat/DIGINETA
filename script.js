@@ -704,7 +704,7 @@ function initScrollToTop() {
   if (!scrollBtn) return;
 
   const toggleVisibility = () => {
-    if (window.scrollY > 320) {
+    if (window.scrollY > 500) {
       scrollBtn.classList.add('visible');
     } else {
       scrollBtn.classList.remove('visible');
