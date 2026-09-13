@@ -8,7 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileDrawer();
   initSmoothScroll();
   initChunavSetuDemo();
+  initChunavSetuAutoCycle();
+  initPortfolioCarousel();
   initPortfolioLightbox();
+  initHeroFeedTicker();
+  initScrollToTop();
   initCtaSelector();
   initScrollReveal();
   initLiveSyncClock();
@@ -207,8 +211,229 @@ function initChunavSetuDemo() {
 }
 
 /* ========================================================
-   5. PORTFOLIO LIGHTBOX MODAL
+   5. PORTFOLIO AUTO-SCROLLING CAROUSEL & LIGHTBOX MODAL
    ======================================================== */
+const portfolioItems = [
+  {
+    src: 'assets/portfolio_1.png',
+    alt: 'Chunav Setu • Election Management',
+    caption: 'Chunav Setu • सम्पूर्ण चुनाव प्रबंधन, रणनीति एवं डैशबोर्ड सिस्टम'
+  },
+  {
+    src: 'assets/portfolio_2.png',
+    alt: 'Political Video & Editing',
+    caption: 'Political Video & Editing • सोशल मीडिया प्रबंधन, रील्स एवं वायरल कंटेंट'
+  },
+  {
+    src: 'assets/portfolio_3.png',
+    alt: 'Hyper Local Meta Ads',
+    caption: 'Hyper Local Meta Ads • 8-पिलर डिजिटल मार्केटिंग एवं रीच अभियान'
+  },
+  {
+    src: 'assets/portfolio_4.png',
+    alt: 'Digital Election Services',
+    caption: 'Digital Election Services • रणनीति, तकनीक एवं ग्राउंड मैनेजमेंट'
+  },
+  {
+    src: 'assets/work_5.png',
+    alt: 'Candidate Brand Identity & Posters',
+    caption: 'Candidate Brand Identity • पोस्टर, होर्डिंग्स, विजन डाक्यूमेंट एवं व्यक्तिगत छवि'
+  },
+  {
+    src: 'assets/work_6.png',
+    alt: 'Ground War Room & Booth Micro-Strategy',
+    caption: 'Ground War Room & Booth Micro-Strategy • 24/7 लाइव पोलिंग ऑपरेशन्स'
+  }
+];
+
+let globalLightboxIndex = 0;
+
+function initPortfolioCarousel() {
+  const container = document.getElementById('portfolioCarouselContainer');
+  const track = document.getElementById('portfolioTrack');
+  const slides = document.querySelectorAll('.portfolio-slide');
+  const dots = document.querySelectorAll('#carouselDots .indicator-dot');
+  const prevBtn = document.getElementById('carouselPrevBtn');
+  const nextBtn = document.getElementById('carouselNextBtn');
+  const statusBadge = document.getElementById('carouselStatusBadge');
+
+  if (!container || !track || !slides.length) return;
+
+  let currentSlide = 0;
+  let autoplayTimer = null;
+  let isHovered = false;
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let touchEndX = 0;
+  let isSwiping = false;
+
+  const getVisibleSlides = () => {
+    if (window.innerWidth >= 992) return 2;
+    return 1;
+  };
+
+  const getMaxIndex = () => {
+    const visible = getVisibleSlides();
+    return Math.max(0, slides.length - visible);
+  };
+
+  const updateCarousel = (index) => {
+    const maxIdx = getMaxIndex();
+    if (index < 0) index = maxIdx;
+    if (index > maxIdx) index = 0;
+    currentSlide = index;
+
+    // Calculate displacement
+    const firstSlide = slides[0];
+    const cardWidth = firstSlide.getBoundingClientRect().width;
+    const gap = 24; // matches CSS gap
+    const moveX = currentSlide * (cardWidth + gap);
+
+    track.style.transform = `translate3d(-${moveX}px, 0, 0)`;
+
+    // Update active classes on slides
+    slides.forEach((slide, idx) => {
+      if (idx === currentSlide || (getVisibleSlides() === 2 && idx === currentSlide + 1)) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+
+    // Update dots
+    dots.forEach((dot, idx) => {
+      if (idx === currentSlide) {
+        dot.classList.add('active');
+        dot.setAttribute('aria-selected', 'true');
+      } else {
+        dot.classList.remove('active');
+        dot.setAttribute('aria-selected', 'false');
+      }
+    });
+  };
+
+  const nextSlide = () => {
+    const maxIdx = getMaxIndex();
+    if (currentSlide >= maxIdx) {
+      updateCarousel(0);
+    } else {
+      updateCarousel(currentSlide + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    const maxIdx = getMaxIndex();
+    if (currentSlide <= 0) {
+      updateCarousel(maxIdx);
+    } else {
+      updateCarousel(currentSlide - 1);
+    }
+  };
+
+  const startAutoplay = () => {
+    stopAutoplay();
+    autoplayTimer = setInterval(() => {
+      if (!isHovered) {
+        nextSlide();
+      }
+    }, 3500);
+
+    if (statusBadge) {
+      statusBadge.classList.remove('paused');
+      const textEl = statusBadge.querySelector('.status-text');
+      if (textEl) textEl.textContent = '⚡ Auto-Scroll Active (3.5s)';
+    }
+  };
+
+  const stopAutoplay = () => {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+    if (statusBadge) {
+      statusBadge.classList.add('paused');
+      const textEl = statusBadge.querySelector('.status-text');
+      if (textEl) textEl.textContent = '⏸️ Auto-Scroll Paused';
+    }
+  };
+
+  // Nav Buttons
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      nextSlide();
+      startAutoplay();
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevSlide();
+      startAutoplay();
+    });
+  }
+
+  // Dots
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const targetIdx = parseInt(dot.getAttribute('data-slide'), 10) || 0;
+      updateCarousel(targetIdx);
+      startAutoplay();
+    });
+  });
+
+  // Pause on hover
+  container.addEventListener('mouseenter', () => {
+    isHovered = true;
+    stopAutoplay();
+  });
+
+  container.addEventListener('mouseleave', () => {
+    isHovered = false;
+    startAutoplay();
+  });
+
+  // Touch Swipe for mobile
+  container.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+    isSwiping = true;
+    stopAutoplay();
+  }, { passive: true });
+
+  container.addEventListener('touchend', (e) => {
+    if (!isSwiping) return;
+    isSwiping = false;
+    touchEndX = e.changedTouches[0].screenX;
+    const touchEndY = e.changedTouches[0].screenY;
+
+    const diffX = touchEndX - touchStartX;
+    const diffY = touchEndY - touchStartY;
+
+    // Only trigger if horizontal swipe is dominant
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 35) {
+      if (diffX < 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+    startAutoplay();
+  }, { passive: true });
+
+  // Recalculate on window resize
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      updateCarousel(currentSlide);
+    }, 150);
+  });
+
+  // Initial update and start
+  updateCarousel(0);
+  startAutoplay();
+}
+
 function initPortfolioLightbox() {
   const cards = document.querySelectorAll('.portfolio-card');
   const modal = document.getElementById('lightboxModal');
@@ -221,37 +446,12 @@ function initPortfolioLightbox() {
 
   if (!cards.length || !modal || !lightboxImg) return;
 
-  const portfolioItems = [
-    {
-      src: 'assets/portfolio_1.png',
-      alt: 'Chunav Setu • Election Management',
-      caption: 'Chunav Setu • सम्पूर्ण चुनाव प्रबंधन, रणनीति एवं डैशबोर्ड सिस्टम'
-    },
-    {
-      src: 'assets/portfolio_2.png',
-      alt: 'Political Video & Editing',
-      caption: 'Political Video & Editing • सोशल मीडिया प्रबंधन, रील्स एवं वायरल कंटेंट'
-    },
-    {
-      src: 'assets/portfolio_3.png',
-      alt: 'Hyper Local Meta Ads',
-      caption: 'Hyper Local Meta Ads • 8-पिलर डिजिटल मार्केटिंग एवं रीच अभियान'
-    },
-    {
-      src: 'assets/portfolio_4.png',
-      alt: 'Digital Election Services',
-      caption: 'Digital Election Services • रणनीति, तकनीक एवं ग्राउंड मैनेजमेंट'
-    }
-  ];
-
-  let currentIndex = 0;
-
   const showImage = (index) => {
     if (index < 0) index = portfolioItems.length - 1;
     if (index >= portfolioItems.length) index = 0;
-    currentIndex = index;
+    globalLightboxIndex = index;
 
-    const item = portfolioItems[currentIndex];
+    const item = portfolioItems[globalLightboxIndex];
     lightboxImg.src = item.src;
     lightboxImg.alt = item.alt;
     lightboxCaption.textContent = item.caption;
@@ -270,8 +470,9 @@ function initPortfolioLightbox() {
     document.body.style.overflow = '';
   };
 
-  cards.forEach((card, idx) => {
-    card.addEventListener('click', () => {
+  cards.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      const idx = parseInt(card.getAttribute('data-index'), 10) || 0;
       openLightbox(idx);
     });
   });
@@ -282,14 +483,14 @@ function initPortfolioLightbox() {
   if (prevBtn) {
     prevBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      showImage(currentIndex - 1);
+      showImage(globalLightboxIndex - 1);
     });
   }
 
   if (nextBtn) {
     nextBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      showImage(currentIndex + 1);
+      showImage(globalLightboxIndex + 1);
     });
   }
 
@@ -298,11 +499,11 @@ function initPortfolioLightbox() {
     if (!modal.classList.contains('active')) return;
 
     if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
-    if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+    if (e.key === 'ArrowLeft') showImage(globalLightboxIndex - 1);
+    if (e.key === 'ArrowRight') showImage(globalLightboxIndex + 1);
   });
 
-  // Touch Swipe for Mobile
+  // Touch Swipe for Lightbox
   let touchStartX = 0;
   let touchEndX = 0;
 
@@ -312,19 +513,15 @@ function initPortfolioLightbox() {
 
   modal.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  }, { passive: true });
-
-  const handleSwipe = () => {
     const diff = touchEndX - touchStartX;
     if (Math.abs(diff) > 45) {
       if (diff > 0) {
-        showImage(currentIndex - 1);
+        showImage(globalLightboxIndex - 1);
       } else {
-        showImage(currentIndex + 1);
+        showImage(globalLightboxIndex + 1);
       }
     }
-  };
+  }, { passive: true });
 }
 
 /* ========================================================
@@ -400,3 +597,128 @@ function initLiveSyncClock() {
   updateTime();
   setInterval(updateTime, 10000);
 }
+
+/* ========================================================
+   9. CHUNAV SETU SAAS AUTO-CYCLE DEMO
+   ======================================================== */
+function initChunavSetuAutoCycle() {
+  const filterBtns = document.querySelectorAll('#wardFilterBtns .filter-btn');
+  const saasWindow = document.querySelector('.saas-window');
+  if (!filterBtns.length || !saasWindow) return;
+
+  let currentBtnIdx = 0;
+  let autoCycleTimer = null;
+  let isUserInteracting = false;
+  let resumeTimeout = null;
+
+  const cycleNext = () => {
+    if (isUserInteracting) return;
+    currentBtnIdx = (currentBtnIdx + 1) % filterBtns.length;
+    const targetBtn = filterBtns[currentBtnIdx];
+    if (targetBtn) {
+      targetBtn.click();
+    }
+  };
+
+  const startAutoCycle = () => {
+    if (autoCycleTimer) clearInterval(autoCycleTimer);
+    autoCycleTimer = setInterval(cycleNext, 4500);
+  };
+
+  const pauseAutoCycle = () => {
+    if (autoCycleTimer) {
+      clearInterval(autoCycleTimer);
+      autoCycleTimer = null;
+    }
+  };
+
+  // When user clicks any tab manually, pause auto-cycling for 12 seconds
+  filterBtns.forEach((btn, idx) => {
+    btn.addEventListener('click', (e) => {
+      if (!e.isTrusted) return; // Ignore programmatic clicks
+      currentBtnIdx = idx;
+      isUserInteracting = true;
+      pauseAutoCycle();
+
+      clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(() => {
+        isUserInteracting = false;
+        startAutoCycle();
+      }, 12000);
+    });
+  });
+
+  // Pause on hover
+  saasWindow.addEventListener('mouseenter', pauseAutoCycle);
+  saasWindow.addEventListener('mouseleave', () => {
+    if (!isUserInteracting) startAutoCycle();
+  });
+
+  startAutoCycle();
+}
+
+/* ========================================================
+   10. HERO ACTIVITY FEED AUTO-TICKER
+   ======================================================== */
+function initHeroFeedTicker() {
+  const feedList = document.querySelector('.feed-list');
+  if (!feedList) return;
+
+  const extraFeedItems = [
+    { booth: 'Ward 24 Booth 08', text: '512 WhatsApp voter slips delivered', time: '1m ago' },
+    { booth: 'Central War Room', text: 'Ground volunteer check-in completed (98%)', time: '3m ago' },
+    { booth: 'Hyper Local Ads', text: '1,45,000+ targeted impressions recorded', time: '4m ago' },
+    { booth: 'Ward 12 In-charge', text: 'Voter rally live video streamed (18k views)', time: '7m ago' }
+  ];
+
+  let feedIdx = 0;
+
+  setInterval(() => {
+    const itemData = extraFeedItems[feedIdx];
+    feedIdx = (feedIdx + 1) % extraFeedItems.length;
+
+    const li = document.createElement('li');
+    li.className = 'feed-item feed-item-new';
+    li.innerHTML = `
+      <span class="feed-dot"></span>
+      <div class="feed-text">
+        <strong>${itemData.booth}:</strong> ${itemData.text}
+      </div>
+      <span class="feed-time">${itemData.time}</span>
+    `;
+
+    feedList.insertBefore(li, feedList.firstChild);
+
+    // Keep max 3 items
+    while (feedList.children.length > 3) {
+      feedList.removeChild(feedList.lastChild);
+    }
+  }, 4000);
+}
+
+/* ========================================================
+   11. FLOATING SCROLL TO TOP BUTTON
+   ======================================================== */
+function initScrollToTop() {
+  const scrollBtn = document.getElementById('scrollToTopBtn');
+  if (!scrollBtn) return;
+
+  const toggleVisibility = () => {
+    if (window.scrollY > 320) {
+      scrollBtn.classList.add('visible');
+    } else {
+      scrollBtn.classList.remove('visible');
+    }
+  };
+
+  window.addEventListener('scroll', toggleVisibility, { passive: true });
+  toggleVisibility();
+
+  scrollBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+

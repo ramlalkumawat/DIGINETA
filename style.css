@@ -997,6 +997,98 @@ button {
 }
 
 /* ========================================================
+   2.5. AUTO-SCROLLING CAMPAIGN MARQUEE TICKER
+   ======================================================== */
+.marquee-ticker-section {
+  width: 100%;
+  background: linear-gradient(90deg, #15092a 0%, #250d40 50%, #15092a 100%);
+  border-top: 1px solid rgba(255, 122, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 122, 0, 0.4);
+  padding: 13px 0;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 106, 0, 0.08);
+  user-select: none;
+  z-index: 10;
+}
+
+.marquee-ticker-section::before,
+.marquee-ticker-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.marquee-ticker-section::before {
+  left: 0;
+  background: linear-gradient(90deg, #0b0617 0%, transparent 100%);
+}
+
+.marquee-ticker-section::after {
+  right: 0;
+  background: linear-gradient(270deg, #0b0617 0%, transparent 100%);
+}
+
+.marquee-ticker-wrap {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 30s linear infinite;
+  will-change: transform;
+}
+
+.marquee-ticker-section:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-content {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 18px;
+  padding-right: 18px;
+}
+
+.m-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.3px;
+}
+
+.m-icon {
+  font-size: 1.15rem;
+}
+
+.m-sep {
+  color: var(--orange-primary);
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ========================================================
    3. SERVICES SECTION
    ======================================================== */
 .services-section {
@@ -1503,18 +1595,181 @@ button {
 }
 
 /* ========================================================
-   5. CAMPAIGN WORK / PORTFOLIO
+   5. CAMPAIGN WORK / PORTFOLIO AUTO-SCROLLING CAROUSEL
    ======================================================== */
 .portfolio-section {
-  padding: 100px 0;
+  padding: 90px 0;
   background: linear-gradient(180deg, #150b28 0%, #0d061a 100%);
   position: relative;
+  overflow: hidden;
 }
 
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
+.portfolio-carousel-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Carousel Control Bar */
+.carousel-control-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.carousel-autoplay-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 122, 0, 0.12);
+  border: 1px solid rgba(255, 122, 0, 0.35);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffaa5e;
+  transition: all 0.3s ease;
+}
+
+.carousel-autoplay-status.paused {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-dim);
+}
+
+.status-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulseDot 2s infinite;
+}
+
+.carousel-autoplay-status.paused .status-pulse-dot {
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+  animation: none;
+}
+
+.carousel-arrow-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.carousel-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.carousel-nav-btn:hover {
+  background: var(--grad-orange);
+  border-color: transparent;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(255, 106, 0, 0.4);
+}
+
+.carousel-nav-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Viewport & Track */
+.portfolio-carousel-viewport {
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-xl);
+  padding: 6px 2px 14px;
+}
+
+.portfolio-carousel-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* Individual Slides */
+.portfolio-slide {
+  flex: 0 0 calc((100% - 24px) / 2);
+  min-width: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio-slide:hover,
+.portfolio-slide.active:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 122, 0, 0.5);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 0 30px rgba(255, 106, 0, 0.25);
+}
+
+/* Carousel Indicators (Dots) */
+.carousel-indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+}
+
+.indicator-dot:hover {
+  background: rgba(255, 122, 0, 0.5);
+}
+
+.indicator-dot.active {
+  width: 32px;
+  background: var(--grad-orange);
+  box-shadow: 0 0 12px rgba(255, 106, 0, 0.6);
+}
+
+.carousel-swipe-hint {
+  display: none;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.hint-hand {
+  animation: bounceHint 2s infinite ease-in-out;
+}
+
+@keyframes bounceHint {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
 }
 
 .portfolio-card {
@@ -2334,117 +2589,452 @@ button {
   }
 }
 
-/* Mobile Screens (< 768px) */
+/* ========================================================
+   11. FLOATING SCROLL TO TOP BUTTON
+   ======================================================== */
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff7a00 0%, #ff4500 100%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(255, 106, 0, 0.45), 0 0 16px rgba(255, 106, 0, 0.3);
+  cursor: pointer;
+  z-index: 990;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.9);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-to-top-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-to-top-btn:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 10px 28px rgba(255, 106, 0, 0.6);
+}
+
+.scroll-to-top-btn .top-icon {
+  width: 22px;
+  height: 22px;
+  stroke: #ffffff;
+}
+
+.top-tooltip {
+  display: none;
+}
+
+/* Feed Item Slide In Animation */
+.feed-item-new {
+  animation: feedSlideIn 0.4s ease forwards;
+}
+
+@keyframes feedSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Table Swipe Pill */
+.table-swipe-pill {
+  font-size: 0.68rem;
+  background: rgba(255, 122, 0, 0.15);
+  color: #ff9e2c;
+  border: 1px solid rgba(255, 122, 0, 0.3);
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-left: 6px;
+  font-weight: 600;
+}
+
+/* ========================================================
+   RESPONSIVE BREAKPOINTS: MOBILE ENHANCEMENTS (< 768px)
+   ======================================================== */
 @media (max-width: 767px) {
   :root {
     --header-height: 64px;
   }
   
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+  }
+
   body {
     padding-bottom: var(--mobile-bar-height);
   }
 
+  .site-header {
+    height: var(--header-height);
+  }
+
+  .header-container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .brand-name {
+    font-size: 1.05rem;
+  }
+
+  /* Marquee ticker on mobile */
+  .marquee-ticker-section {
+    padding: 10px 0;
+  }
+
+  .m-item {
+    font-size: 0.82rem;
+    gap: 6px;
+  }
+
+  .m-icon {
+    font-size: 1rem;
+  }
+
   .hero-section {
-    padding-top: calc(var(--header-height) + 24px);
-    padding-bottom: 50px;
+    padding-top: calc(var(--header-height) + 18px);
+    padding-bottom: 40px;
   }
 
   .hero-headline {
-    font-size: 2.1rem;
+    font-size: clamp(1.85rem, 6.5vw, 2.5rem);
+    line-height: 1.25;
+  }
+
+  .hero-subtext {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 22px;
   }
 
   .hero-cta-group {
     flex-direction: column;
     width: 100%;
+    gap: 10px;
   }
 
   .hero-cta-group .btn {
     width: 100%;
+    height: 50px;
+    font-size: 0.96rem;
   }
 
   .hero-highlights-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .highlight-item {
+    padding: 12px 10px;
+    gap: 10px;
+  }
+
+  .hl-number {
+    font-size: 1.25rem;
+  }
+
+  .hl-title {
+    font-size: 0.84rem;
+  }
+
+  .hl-desc {
+    font-size: 0.72rem;
+  }
+
+  /* Dashboard Mockup on Mobile */
+  .dashboard-mockup-wrapper {
+    margin-top: 24px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .mockup-header-bar {
+    padding: 10px 12px;
+    font-size: 0.72rem;
   }
 
   .mockup-kpi-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .mockup-kpi-grid .kpi-card:last-child {
+    grid-column: span 2;
   }
 
   .mockup-activity-row {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .activity-chart-box, .mockup-feed-card {
+    padding: 10px;
+  }
+
+  .mini-chart-bars {
+    gap: 6px;
+  }
+
+  /* Services Grid */
+  .services-section {
+    padding: 60px 0;
   }
 
   .services-grid {
     grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .service-card {
+    padding: 24px 20px;
+  }
+
+  /* Chunav Setu SaaS */
+  .chunav-setu-section {
+    padding: 60px 0;
   }
 
   .chunav-setu-layout {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .setu-features-list {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .saas-window {
+    border-radius: var(--radius-md);
+  }
+
+  .saas-tabs-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .filter-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    width: 100%;
+    gap: 6px;
+    padding-bottom: 4px;
+  }
+
+  .filter-buttons::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 0.78rem;
+    padding: 6px 12px;
   }
 
   .saas-stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 10px 12px;
   }
 
-  .portfolio-grid {
-    grid-template-columns: 1fr;
+  .stat-card {
+    padding: 10px;
+  }
+
+  .st-val {
+    font-size: 1.25rem;
+  }
+
+  .booth-table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    border-radius: 8px;
+    margin: 8px 0;
+  }
+
+  .saas-table {
+    min-width: 480px;
+    font-size: 0.78rem;
+  }
+
+  .saas-table th, .saas-table td {
+    padding: 8px 10px;
+  }
+
+  /* Portfolio Carousel on Mobile */
+  .portfolio-section {
+    padding: 60px 0;
+  }
+
+  .portfolio-slide {
+    flex: 0 0 100%;
+  }
+
+  .portfolio-media {
+    aspect-ratio: 16 / 10;
+  }
+
+  .portfolio-meta {
+    padding: 16px 18px;
+    gap: 14px;
+  }
+
+  .port-num {
+    font-size: 1.35rem;
+  }
+
+  .port-title {
+    font-size: 1.05rem;
+  }
+
+  .carousel-swipe-hint {
+    display: flex;
+  }
+
+  .carousel-control-bar {
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  /* Process Steps */
+  .how-we-work-section {
+    padding: 60px 0;
   }
 
   .process-steps-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .step-connector {
+    display: none;
+  }
+
+  .process-step-card {
+    padding: 22px 18px;
+  }
+
+  /* Why Us */
+  .why-us-section {
+    padding: 60px 0;
   }
 
   .why-us-box {
-    padding: 36px 20px;
+    padding: 30px 16px;
   }
 
   .advantages-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .why-pillars-strip {
     grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  /* Contact CTA */
+  .contact-section {
+    padding: 60px 0;
   }
 
   .contact-cta-wrapper {
-    padding: 40px 20px;
+    padding: 32px 16px;
+  }
+
+  .selector-chips {
+    gap: 6px;
+  }
+
+  .chip {
+    font-size: 0.78rem;
+    padding: 7px 12px;
   }
 
   .cta-buttons-row {
     flex-direction: column;
     width: 100%;
+    gap: 10px;
   }
 
   .cta-buttons-row .btn {
     width: 100%;
+    height: 52px;
+    font-size: 1rem;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding-bottom: calc(var(--mobile-bar-height) + 36px);
   }
 
   .footer-top-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
+  }
+
+  /* Scroll To Top on Mobile */
+  .scroll-to-top-btn {
+    bottom: calc(var(--mobile-bar-height) + 14px);
+    right: 14px;
+    width: 44px;
+    height: 44px;
   }
 
   .lightbox-nav-btn.prev { left: 4px; }
   .lightbox-nav-btn.next { right: 4px; }
 }
 
-/* Extra Small (320px - 380px) */
+/* Extra Small Mobile (320px - 380px) */
 @media (max-width: 380px) {
-  .brand-main {
-    font-size: 1.05rem;
+  .brand-name {
+    font-size: 0.95rem;
+  }
+  .sub-tag, .sub-dot {
+    display: none;
   }
   .hero-headline {
-    font-size: 1.85rem;
+    font-size: 1.75rem;
   }
-  .why-pillars-strip {
-    grid-template-columns: repeat(2, 1fr);
+  .hero-highlights-grid {
+    grid-template-columns: 1fr;
+  }
+  .mockup-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  .mockup-kpi-grid .kpi-card:last-child {
+    grid-column: auto;
   }
   .saas-stats-grid {
     grid-template-columns: 1fr;
+  }
+  .why-pillars-strip {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

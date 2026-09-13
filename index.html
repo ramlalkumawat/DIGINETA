@@ -312,6 +312,48 @@
     </section>
 
     <!-- ========================================================
+         2.5. AUTO-SCROLLING CAMPAIGN MARQUEE TICKER
+         ======================================================== -->
+    <div class="marquee-ticker-section" aria-label="Election Campaign Highlights Ticker">
+      <div class="marquee-ticker-wrap">
+        <div class="marquee-track">
+          <div class="marquee-content">
+            <span class="m-item"><span class="m-icon">🚩</span> राजस्थान विधानसभा, नगर निगम &amp; पंचायत चुनाव 2026</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">🏆</span> 50+ विजयी चुनावी अभियान &amp; ब्रांडिंग</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">📲</span> Chunav Setu SaaS ऐप • लाइव डेमो उपलब्ध</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">🎯</span> हाइपर-लोकल मेटा ऐड्स &amp; वार्ड-वार टारगेटिंग</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">⚡</span> 24/7 डिजिटल वॉर रूम &amp; कार्यकर्ता मैनेजमेंट</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">📊</span> बूथ-वार मतदाता डेटा &amp; डिजिटल पर्ची वितरण</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">🔒</span> 100% डेटा गोपनीयता &amp; निर्वाचन आयोग नियम अनुपालन</span>
+            <span class="m-sep">•</span>
+          </div>
+          <div class="marquee-content" aria-hidden="true">
+            <span class="m-item"><span class="m-icon">🚩</span> राजस्थान विधानसभा, नगर निगम &amp; पंचायत चुनाव 2026</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">🏆</span> 50+ विजयी चुनावी अभियान &amp; ब्रांडिंग</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">📲</span> Chunav Setu SaaS ऐप • लाइव डेमो उपलब्ध</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">🎯</span> हाइपर-लोकल मेटा ऐड्स &amp; वार्ड-वार टारगेटिंग</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">⚡</span> 24/7 डिजिटल वॉर रूम &amp; कार्यकर्ता मैनेजमेंट</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">📊</span> बूथ-वार मतदाता डेटा &amp; डिजिटल पर्ची वितरण</span>
+            <span class="m-sep">•</span>
+            <span class="m-item"><span class="m-icon">🔒</span> 100% डेटा गोपनीयता &amp; निर्वाचन आयोग नियम अनुपालन</span>
+            <span class="m-sep">•</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
          3. SERVICES SECTION
          ======================================================== -->
     <section class="services-section" id="services">
@@ -696,86 +738,166 @@
           </p>
         </div>
 
-        <div class="portfolio-grid">
+        <!-- Portfolio Auto-Scrolling Carousel Wrapper -->
+        <div class="portfolio-carousel-container reveal-on-scroll" id="portfolioCarouselContainer">
           
-          <!-- ITEM 1 -->
-          <div class="portfolio-card reveal-on-scroll" data-index="0" data-caption="Chunav Setu • Election Management Strategy">
-            <div class="portfolio-media">
-              <img src="assets/portfolio_1.png" alt="Chunav Setu Election Management Strategy Showcase" loading="lazy" class="portfolio-img">
-              <div class="portfolio-overlay">
-                <div class="overlay-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                </div>
-                <span class="overlay-text">फुल स्क्रीन देखें (Click to Zoom)</span>
-              </div>
+          <!-- Top Carousel Header Bar with Autoplay Indicator & Nav Buttons -->
+          <div class="carousel-control-bar">
+            <div class="carousel-autoplay-status" id="carouselStatusBadge">
+              <span class="status-pulse-dot"></span>
+              <span class="status-text">⚡ Auto-Scroll Active (3.5s)</span>
             </div>
-            <div class="portfolio-meta">
-              <span class="port-num">01</span>
-              <div class="port-info">
-                <h3 class="port-title">Chunav Setu • Election Management</h3>
-                <p class="port-sub">सम्पूर्ण चुनाव प्रबंधन, रणनीति एवं डैशबोर्ड सिस्टम</p>
-              </div>
+            <div class="carousel-arrow-group">
+              <button class="carousel-nav-btn prev" id="carouselPrevBtn" aria-label="Previous Slide">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button class="carousel-nav-btn next" id="carouselNextBtn" aria-label="Next Slide">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
             </div>
           </div>
 
-          <!-- ITEM 2 -->
-          <div class="portfolio-card reveal-on-scroll" data-index="1" data-caption="Political Video & Social Media Studio">
-            <div class="portfolio-media">
-              <img src="assets/portfolio_2.png" alt="Political Video & Social Media Studio Showcase" loading="lazy" class="portfolio-img">
-              <div class="portfolio-overlay">
-                <div class="overlay-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          <!-- Carousel Viewport & Track -->
+          <div class="portfolio-carousel-viewport" id="portfolioViewport">
+            <div class="portfolio-carousel-track" id="portfolioTrack">
+              
+              <!-- ITEM 1 -->
+              <div class="portfolio-card portfolio-slide active" data-index="0" data-caption="Chunav Setu • सम्पूर्ण चुनाव प्रबंधन, रणनीति एवं डैशबोर्ड सिस्टम">
+                <div class="portfolio-media">
+                  <img src="assets/portfolio_1.png" alt="Chunav Setu Election Management Strategy Showcase" loading="lazy" class="portfolio-img">
+                  <div class="portfolio-overlay">
+                    <div class="overlay-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    </div>
+                    <span class="overlay-text">फुल स्क्रीन देखें (Click to Zoom)</span>
+                  </div>
                 </div>
-                <span class="overlay-text">फुल स्क्रीन देखें (Click to Zoom)</span>
+                <div class="portfolio-meta">
+                  <span class="port-num">01</span>
+                  <div class="port-info">
+                    <h3 class="port-title">Chunav Setu • Election Management</h3>
+                    <p class="port-sub">सम्पूर्ण चुनाव प्रबंधन, रणनीति एवं डैशबोर्ड सिस्टम</p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="portfolio-meta">
-              <span class="port-num">02</span>
-              <div class="port-info">
-                <h3 class="port-title">Political Video & Editing</h3>
-                <p class="port-sub">सोशल मीडिया प्रबंधन, रील्स, पोस्टर्स एवं वायरल कंटेंट</p>
+
+              <!-- ITEM 2 -->
+              <div class="portfolio-card portfolio-slide" data-index="1" data-caption="Political Video & Editing • सोशल मीडिया प्रबंधन, रील्स एवं वायरल कंटेंट">
+                <div class="portfolio-media">
+                  <img src="assets/portfolio_2.png" alt="Political Video & Social Media Studio Showcase" loading="lazy" class="portfolio-img">
+                  <div class="portfolio-overlay">
+                    <div class="overlay-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    </div>
+                    <span class="overlay-text">फुल स्क्रीन देखें (Click to Zoom)</span>
+                  </div>
+                </div>
+                <div class="portfolio-meta">
+                  <span class="port-num">02</span>
+                  <div class="port-info">
+                    <h3 class="port-title">Political Video & Editing</h3>
+                    <p class="port-sub">सोशल मीडिया प्रबंधन, रील्स, पोस्टर्स एवं वायरल कंटेंट</p>
+                  </div>
+                </div>
               </div>
+
+              <!-- ITEM 3 -->
+              <div class="portfolio-card portfolio-slide" data-index="2" data-caption="Hyper Local Meta Ads • 8-पिलर डिजिटल मार्केटिंग एवं रीच अभियान">
+                <div class="portfolio-media">
+                  <img src="assets/portfolio_3.png" alt="Hyper Local Meta Ads and Election Services" loading="lazy" class="portfolio-img">
+                  <div class="portfolio-overlay">
+                    <div class="overlay-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    </div>
+                    <span class="overlay-text">फुल स्क्रीन देखें (Click to Zoom)</span>
+                  </div>
+                </div>
+                <div class="portfolio-meta">
+                  <span class="port-num">03</span>
+                  <div class="port-info">
+                    <h3 class="port-title">Hyper Local Meta Ads</h3>
+                    <p class="port-sub">8-पिलर डिजिटल मार्केटिंग, टारगेटिंग एवं रीच अभियान</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ITEM 4 -->
+              <div class="portfolio-card portfolio-slide" data-index="3" data-caption="Digital Election Services • रणनीति, तकनीक एवं ग्राउंड मैनेजमेंट">
+                <div class="portfolio-media">
+                  <img src="assets/portfolio_4.png" alt="Digital Election Services & Campaign Strategy" loading="lazy" class="portfolio-img">
+                  <div class="portfolio-overlay">
+                    <div class="overlay-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    </div>
+                    <span class="overlay-text">फुल स्क्रीन देखें (Click to Zoom)</span>
+                  </div>
+                </div>
+                <div class="portfolio-meta">
+                  <span class="port-num">04</span>
+                  <div class="port-info">
+                    <h3 class="port-title">Digital Election Services</h3>
+                    <p class="port-sub">रणनीति, तकनीक, ग्राउंड मैनेजमेंट एवं डेटा आधारित निर्णय</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ITEM 5 -->
+              <div class="portfolio-card portfolio-slide" data-index="4" data-caption="Candidate Brand Identity • पोस्टर, होर्डिंग्स, विजन डाक्यूमेंट एवं व्यक्तिगत छवि">
+                <div class="portfolio-media">
+                  <img src="assets/work_5.png" alt="Candidate Brand Identity and Posters" loading="lazy" class="portfolio-img">
+                  <div class="portfolio-overlay">
+                    <div class="overlay-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    </div>
+                    <span class="overlay-text">फुल स्क्रीन देखें (Click to Zoom)</span>
+                  </div>
+                </div>
+                <div class="portfolio-meta">
+                  <span class="port-num">05</span>
+                  <div class="port-info">
+                    <h3 class="port-title">Candidate Brand Identity</h3>
+                    <p class="port-sub">उम्मीदवार व्यक्तिगत ब्रांडिंग, HD पोस्टर्स एवं प्रचार सामग्री</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ITEM 6 -->
+              <div class="portfolio-card portfolio-slide" data-index="5" data-caption="Ground War Room & Booth Micro-Strategy • 24/7 लाइव पोलिंग ऑपरेशन्स">
+                <div class="portfolio-media">
+                  <img src="assets/work_6.png" alt="Ground War Room and Booth Micro-Strategy" loading="lazy" class="portfolio-img">
+                  <div class="portfolio-overlay">
+                    <div class="overlay-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                    </div>
+                    <span class="overlay-text">फुल स्क्रीन देखें (Click to Zoom)</span>
+                  </div>
+                </div>
+                <div class="portfolio-meta">
+                  <span class="port-num">06</span>
+                  <div class="port-info">
+                    <h3 class="port-title">War Room & Booth Strategy</h3>
+                    <p class="port-sub">24/7 लाइव वॉर रूम, बूथ स्तर मतदाता संपर्क एवं फील्ड ऑपरेशन्स</p>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <!-- ITEM 3 -->
-          <div class="portfolio-card reveal-on-scroll" data-index="2" data-caption="Hyper Local Meta Ads & Campaign Services">
-            <div class="portfolio-media">
-              <img src="assets/portfolio_3.png" alt="Hyper Local Meta Ads and Election Services" loading="lazy" class="portfolio-img">
-              <div class="portfolio-overlay">
-                <div class="overlay-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                </div>
-                <span class="overlay-text">फुल स्क्रीन देखें (Click to Zoom)</span>
-              </div>
-            </div>
-            <div class="portfolio-meta">
-              <span class="port-num">03</span>
-              <div class="port-info">
-                <h3 class="port-title">Hyper Local Meta Ads</h3>
-                <p class="port-sub">8-पिलर डिजिटल मार्केटिंग, टारगेटिंग एवं रीच अभियान</p>
-              </div>
-            </div>
+          <!-- Carousel Indicators / Navigation Dots -->
+          <div class="carousel-indicators" id="carouselDots" role="tablist" aria-label="Portfolio Slides Navigation">
+            <button class="indicator-dot active" data-slide="0" aria-label="Slide 1"></button>
+            <button class="indicator-dot" data-slide="1" aria-label="Slide 2"></button>
+            <button class="indicator-dot" data-slide="2" aria-label="Slide 3"></button>
+            <button class="indicator-dot" data-slide="3" aria-label="Slide 4"></button>
+            <button class="indicator-dot" data-slide="4" aria-label="Slide 5"></button>
+            <button class="indicator-dot" data-slide="5" aria-label="Slide 6"></button>
           </div>
 
-          <!-- ITEM 4 -->
-          <div class="portfolio-card reveal-on-scroll" data-index="3" data-caption="Digital Election Services & Candidate Strategy">
-            <div class="portfolio-media">
-              <img src="assets/portfolio_4.png" alt="Digital Election Services & Campaign Strategy" loading="lazy" class="portfolio-img">
-              <div class="portfolio-overlay">
-                <div class="overlay-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                </div>
-                <span class="overlay-text">फुल स्क्रीन देखें (Click to Zoom)</span>
-              </div>
-            </div>
-            <div class="portfolio-meta">
-              <span class="port-num">04</span>
-              <div class="port-info">
-                <h3 class="port-title">Digital Election Services</h3>
-                <p class="port-sub">रणनीति, तकनीक, ग्राउंड मैनेजमेंट एवं डेटा आधारित निर्णय</p>
-              </div>
-            </div>
+          <!-- Mobile Swipe Instruction Hint -->
+          <div class="carousel-swipe-hint">
+            <span class="hint-hand">👆</span>
+            <span>बाएं या दाएं स्वाइप करें (Swipe left/right or auto-scrolls)</span>
           </div>
 
         </div>
@@ -1278,6 +1400,16 @@
       </button>
     </div>
   </div>
+
+  <!-- ========================================================
+       11. FLOATING SCROLL TO TOP BUTTON
+       ======================================================== -->
+  <button class="scroll-to-top-btn" id="scrollToTopBtn" aria-label="ऊपर स्क्रॉल करें (Scroll to top)" title="Scroll to top">
+    <svg viewBox="0 0 24 24" class="top-icon" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+    <span class="top-tooltip">Top</span>
+  </button>
 
   <!-- Javascript -->
   <script src="script.js"></script>
