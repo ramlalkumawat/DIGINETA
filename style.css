@@ -2310,6 +2310,19 @@ button {
   margin-bottom: 18px;
 }
 
+.footer-office-item strong {
+  color: var(--orange-light);
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.footer-office-item p {
+  color: #cbd5e1;
+  margin: 0;
+}
+
 .footer-contact-links {
   display: flex;
   flex-direction: column;
