@@ -2211,26 +2211,121 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  height: 48px;
+  gap: 6px;
+  height: 46px;
   border-radius: var(--radius-pill);
   font-family: var(--font-heading);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 700;
   text-decoration: none;
   transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.mobile-bar-btn.btn-internship-bar {
+  background: var(--grad-orange);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(255, 106, 0, 0.45);
+  border: 1px solid rgba(255, 122, 0, 0.45);
+  flex: 1.25;
 }
 
 .mobile-bar-btn.btn-call {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  flex: 0.85;
 }
 
 .mobile-bar-btn.btn-wa {
   background: var(--wa-green);
   color: #ffffff;
   box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+  flex: 1.1;
+}
+
+/* Mobile Featured Internship Card in Drawer */
+.mobile-featured-internship-box {
+  display: block;
+  background: linear-gradient(135deg, rgba(46, 20, 92, 0.9) 0%, rgba(255, 106, 0, 0.25) 100%);
+  border: 1px solid rgba(255, 122, 0, 0.45);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s ease;
+}
+
+.mobile-featured-internship-box:hover {
+  border-color: var(--orange-light);
+  transform: translateY(-2px);
+}
+
+.m-int-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: var(--orange-light);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.m-int-title {
+  font-family: var(--font-heading);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+
+.m-int-desc {
+  font-size: 0.8rem;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.m-int-cta {
+  display: inline-block;
+  background: var(--grad-orange);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+}
+
+/* Mobile Responsiveness for Header & Actions */
+@media (max-width: 768px) {
+  .btn-internship-header {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    gap: 4px;
+  }
+  .btn-internship-header svg {
+    display: none;
+  }
+  .hero-announcement-banner {
+    display: flex;
+    width: 100%;
+    font-size: 0.76rem;
+    padding: 6px 10px;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-sub {
+    display: none;
+  }
+  .mobile-bar-btn {
+    font-size: 0.74rem;
+    height: 42px;
+    gap: 4px;
+  }
 }
 
 /* Hide on desktop */
