@@ -4099,21 +4099,20 @@ button {
 }
 
 .tally-container-card {
-  background: rgba(22, 11, 46, 0.92);
-  border: 1px solid rgba(255, 122, 0, 0.28);
+  background: #ffffff;
+  border: 2px solid rgba(255, 122, 0, 0.45);
   border-radius: var(--radius-xl);
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.5), 0 0 35px rgba(255, 106, 0, 0.12);
-  overflow: hidden;
-  padding: 16px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.5), 0 0 35px rgba(255, 106, 0, 0.2);
+  padding: 16px 8px;
   position: relative;
+  width: 100%;
 }
 
 .tally-iframe-wrapper {
   width: 100%;
-  min-height: 800px;
+  min-height: 850px;
   border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: transparent;
+  background: #ffffff;
   display: flex;
   justify-content: center;
 }
@@ -4121,8 +4120,41 @@ button {
 .tally-iframe-wrapper iframe {
   width: 100%;
   border: none;
-  min-height: 850px;
+  min-height: 1200px;
+  height: 1400px;
   display: block;
+  background: #ffffff;
+}
+
+.tally-direct-link-box {
+  margin-top: 16px;
+  text-align: center;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 122, 0, 0.28);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.tally-direct-link-box span {
+  font-size: 0.88rem;
+  color: #cbd5e1;
+}
+
+.btn-tally-direct {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--grad-orange);
+  color: #ffffff !important;
+  padding: 8px 20px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
 }
 
 /* FAQ SECTION */
@@ -4255,12 +4287,19 @@ button {
   }
 
   .tally-container-card {
-    padding: 10px;
+    padding: 8px 4px;
     border-radius: var(--radius-lg);
+    background: #ffffff;
   }
 
   .tally-iframe-wrapper {
-    min-height: 950px;
+    min-height: 1200px;
+    background: #ffffff;
+  }
+
+  .tally-iframe-wrapper iframe {
+    min-height: 1200px;
+    height: 1400px;
   }
 
   .faq-question {
