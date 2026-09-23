@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCtaSelector();
   initScrollReveal();
   initLiveSyncClock();
+  initFaqAccordion();
 });
 
 /* ========================================================
@@ -407,4 +408,39 @@ function initScrollToTop() {
     });
   });
 }
+
+/* ========================================================
+   12. INTERNSHIP FAQ ACCORDION
+   ======================================================== */
+function initFaqAccordion() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  if (!faqItems.length) return;
+
+  faqItems.forEach(item => {
+    const questionBtn = item.querySelector('.faq-question');
+    if (!questionBtn) return;
+
+    questionBtn.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+
+      // Close other open FAQ items for a clean single-open accordion feel
+      faqItems.forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('active');
+          const otherBtn = otherItem.querySelector('.faq-question');
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      if (isActive) {
+        item.classList.remove('active');
+        questionBtn.setAttribute('aria-expanded', 'false');
+      } else {
+        item.classList.add('active');
+        questionBtn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+}
+
 
