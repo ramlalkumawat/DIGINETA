@@ -3,7 +3,7 @@
  * Pure Vanilla JavaScript • High Performance & Zero Bloat
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+function initAllInteractive() {
   initStickyHeader();
   initMobileDrawer();
   initSmoothScroll();
@@ -15,7 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initLiveSyncClock();
   initFaqAccordion();
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAllInteractive);
+} else {
+  initAllInteractive();
+}
 
 /* ========================================================
    1. STICKY HEADER
