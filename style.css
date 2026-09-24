@@ -277,6 +277,9 @@ button {
 /* ========================================================
    1. STICKY HEADER
    ======================================================== */
+/* ========================================================
+   1. SITE HEADER - MASTER RESPONSIVE STYLING
+   ======================================================== */
 .site-header {
   position: fixed;
   top: 0;
@@ -284,69 +287,87 @@ button {
   width: 100%;
   height: var(--header-height);
   z-index: 1000;
-  background: rgba(11, 6, 23, 0.82);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(11, 6, 23, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .site-header.scrolled {
-  background: rgba(11, 6, 23, 0.95);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  background: rgba(11, 6, 23, 0.96);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
 }
 
-.header-container {
+.site-header .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  max-width: 1360px;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: clamp(14px, 2.5vw, 28px);
+  padding-right: clamp(14px, 2.5vw, 28px);
+  gap: 12px;
+  flex-wrap: nowrap;
 }
 
 /* Brand Logo */
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
+  flex-shrink: 0;
+  min-width: 0;
 }
 
 .brand-badge-icon {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .logo-svg {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   filter: drop-shadow(0 2px 8px rgba(255, 122, 0, 0.4));
+  transition: transform 0.25s ease;
+}
+
+.brand-logo:hover .logo-svg {
+  transform: scale(1.05);
 }
 
 .brand-text {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .brand-main {
   font-family: var(--font-heading);
-  font-size: 1.22rem;
+  font-size: 1.18rem;
   font-weight: 800;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   color: #ffffff;
   line-height: 1.1;
+  white-space: nowrap;
 }
 
 .brand-sub {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 0.72rem;
+  gap: 4px;
+  font-size: 0.70rem;
   font-weight: 600;
   color: var(--text-dim);
+  white-space: nowrap;
 }
 
 .sub-badge {
@@ -357,26 +378,35 @@ button {
   color: rgba(255, 255, 255, 0.3);
 }
 
-/* Desktop Nav */
+/* Desktop Nav - Default hidden on mobile & tablet */
 .desktop-nav {
   display: none;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .nav-list {
   display: flex;
   align-items: center;
-  gap: clamp(8px, 1.2vw, 18px);
   list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+  gap: clamp(6px, 1vw, 14px);
 }
 
 .nav-link {
   font-family: var(--font-heading);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-muted);
   position: relative;
-  padding: 6px 4px;
+  padding: 6px 5px;
   white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-link:hover {
@@ -392,11 +422,12 @@ button {
   background: rgba(255, 122, 0, 0.16);
   border: 1px solid rgba(255, 122, 0, 0.38);
   border-radius: var(--radius-pill);
-  padding: 5px 12px !important;
+  padding: 4px 10px !important;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
+  white-space: nowrap;
   transition: all 0.25s ease;
 }
 
@@ -407,13 +438,13 @@ button {
 }
 
 .nav-pill {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 700;
   text-transform: uppercase;
   background: rgba(255, 122, 0, 0.2);
   color: var(--orange-light);
   border: 1px solid rgba(255, 122, 0, 0.4);
-  padding: 2px 6px;
+  padding: 1px 5px;
   border-radius: 4px;
   margin-left: 4px;
 }
@@ -423,6 +454,8 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
 }
 
 .btn-internship-header {
@@ -431,14 +464,16 @@ button {
   gap: 6px;
   background: var(--grad-orange);
   color: #ffffff !important;
-  padding: 7px 16px;
-  font-size: 0.86rem;
+  padding: 7px 15px;
+  font-size: 0.84rem;
   font-weight: 700;
   border-radius: var(--radius-pill);
   box-shadow: 0 2px 10px rgba(255, 106, 0, 0.35);
   border: 1px solid rgba(255, 122, 0, 0.4);
   white-space: nowrap;
   transition: all 0.25s ease;
+  flex-shrink: 0;
+  text-decoration: none;
 }
 
 .btn-internship-header:hover {
@@ -447,16 +482,47 @@ button {
 }
 
 .btn-internship-header .btn-icon {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.btn-internship-header .btn-text-short {
+  display: none;
 }
 
 .btn-whatsapp-header {
   display: none;
+  align-items: center;
+  gap: 6px;
   background-color: var(--wa-green);
-  color: #ffffff;
-  padding: 8px 18px;
-  font-size: 0.88rem;
+  color: #ffffff !important;
+  padding: 7px 16px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 2px 10px rgba(37, 211, 102, 0.3);
+  border: 1px solid rgba(37, 211, 102, 0.4);
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.btn-whatsapp-header:hover {
+  background-color: var(--wa-green-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.5);
+}
+
+.btn-whatsapp-header .btn-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.btn-whatsapp-header .btn-text-short {
+  display: none;
 }
 
 /* Hero Announcement Banner */
@@ -2415,6 +2481,23 @@ button {
   .brand-sub {
     display: none;
   }
+  .brand-name {
+    font-size: 0.95rem;
+  }
+  .site-header .header-container {
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 6px;
+  }
+  .btn-internship-header {
+    padding: 5px 8px;
+    font-size: 0.72rem;
+  }
+  .mobile-menu-btn {
+    width: 35px;
+    height: 35px;
+    padding: 7px;
+  }
   .mobile-sticky-bar {
     padding: 6px 6px calc(6px + env(safe-area-inset-bottom, 0px));
     gap: 5px;
@@ -2432,6 +2515,19 @@ button {
 }
 
 @media (max-width: 325px) {
+  .brand-name {
+    font-size: 0.86rem;
+  }
+  .brand-badge-icon,
+  .logo-svg {
+    width: 30px;
+    height: 30px;
+  }
+  .site-header .header-container {
+    padding-left: 8px;
+    padding-right: 8px;
+    gap: 4px;
+  }
   .mobile-sticky-bar {
     padding: 5px 4px calc(5px + env(safe-area-inset-bottom, 0px));
     gap: 4px;
@@ -2475,27 +2571,132 @@ button {
 }
 
 /* ========================================================
-   RESPONSIVE BREAKPOINTS
+   RESPONSIVE BREAKPOINTS: HEADER & MAIN LAYOUT
    ======================================================== */
 
-/* Desktop & Laptops (960px and above) */
-@media (min-width: 960px) {
+/* 1. LARGE DESKTOP (1240px and above): Full Desktop Navigation + Full CTAs */
+@media (min-width: 1240px) {
   .desktop-nav {
     display: block;
+  }
+  .mobile-menu-btn {
+    display: none;
   }
   .btn-whatsapp-header {
     display: inline-flex;
   }
-  .mobile-menu-btn {
-    display: none;
+  .btn-internship-header {
+    display: inline-flex;
   }
   .hero-container {
     grid-template-columns: 1.15fr 1fr;
   }
 }
 
-/* Tablet & Smaller Laptops (768px - 959px) */
-@media (max-width: 959px) and (min-width: 768px) {
+/* 2. MEDIUM DESKTOP / COMPACT LAPTOP (1080px to 1239px)
+   Intelligent compact desktop header: no wrapping, no squeezed text, no overlap */
+@media (min-width: 1080px) and (max-width: 1239px) {
+  .desktop-nav {
+    display: block;
+  }
+  .mobile-menu-btn {
+    display: none;
+  }
+  .site-header .header-container {
+    gap: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .brand-logo {
+    gap: 8px;
+  }
+  .brand-badge-icon,
+  .logo-svg {
+    width: 34px;
+    height: 34px;
+  }
+  .brand-main {
+    font-size: 1.08rem;
+  }
+  .sub-tag,
+  .sub-dot {
+    display: none;
+  }
+  .nav-list {
+    gap: 6px;
+  }
+  .nav-link {
+    font-size: 0.81rem;
+    padding: 5px 3px;
+  }
+  .nav-link.nav-internship-item {
+    padding: 3px 8px !important;
+    font-size: 0.79rem;
+  }
+  .nav-pill {
+    font-size: 0.58rem;
+    padding: 1px 4px;
+    margin-left: 3px;
+  }
+  .header-action {
+    gap: 8px;
+  }
+  .btn-internship-header {
+    padding: 6px 11px;
+    font-size: 0.79rem;
+  }
+  .btn-whatsapp-header {
+    display: inline-flex;
+    padding: 6px 11px;
+    font-size: 0.79rem;
+  }
+  .btn-whatsapp-header .btn-text-full {
+    display: none;
+  }
+  .btn-whatsapp-header .btn-text-short {
+    display: inline;
+  }
+  .hero-container {
+    grid-template-columns: 1.15fr 1fr;
+  }
+}
+
+/* 3. TABLET & COMPACT (max-width: 1079px):
+   Switches cleanly to Responsive Hamburger Navigation */
+@media (max-width: 1079px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+  .btn-whatsapp-header {
+    display: none !important;
+  }
+}
+
+/* 4. TABLET SCREENS (768px to 1079px) */
+@media (min-width: 768px) and (max-width: 1079px) {
+  .site-header .header-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .brand-logo {
+    gap: 10px;
+  }
+  .brand-badge-icon,
+  .logo-svg {
+    width: 36px;
+    height: 36px;
+  }
+  .brand-main {
+    font-size: 1.15rem;
+  }
+  .btn-internship-header {
+    display: inline-flex;
+    padding: 7px 14px;
+    font-size: 0.82rem;
+  }
   .hero-container {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -2507,7 +2708,6 @@ button {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-
   .process-steps-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2617,13 +2817,47 @@ button {
     height: var(--header-height);
   }
 
-  .header-container {
+  .site-header .header-container {
     padding-left: 14px;
     padding-right: 14px;
+    gap: 8px;
+  }
+
+  .brand-logo {
+    gap: 8px;
+  }
+
+  .brand-badge-icon,
+  .logo-svg {
+    width: 34px;
+    height: 34px;
   }
 
   .brand-name {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
+  }
+
+  .sub-tag,
+  .sub-dot {
+    display: none;
+  }
+
+  .btn-internship-header {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    gap: 4px;
+  }
+
+  .btn-internship-header svg {
+    display: none;
+  }
+
+  .btn-internship-header .btn-text-full {
+    display: none;
+  }
+
+  .btn-internship-header .btn-text-short {
+    display: inline;
   }
 
   /* Marquee ticker on mobile */
