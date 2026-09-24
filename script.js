@@ -42,25 +42,17 @@ function initStickyHeader() {
 function initMobileDrawer() {
   const menuBtn = document.getElementById('mobileMenuBtn');
   const drawer = document.getElementById('mobileDrawer');
+  const closeBtn = document.getElementById('mobileDrawerCloseBtn');
   const navLinks = document.querySelectorAll('.mobile-nav-link');
 
   if (!menuBtn || !drawer) return;
-
-  const toggleMenu = (e) => {
-    if (e) e.stopPropagation();
-    const isOpen = drawer.classList.contains('open');
-    if (isOpen) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  };
 
   const openMenu = () => {
     drawer.classList.add('open');
     menuBtn.classList.add('active');
     menuBtn.setAttribute('aria-expanded', 'true');
     drawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('drawer-open');
     document.body.style.overflow = 'hidden';
   };
 
@@ -69,31 +61,51 @@ function initMobileDrawer() {
     menuBtn.classList.remove('active');
     menuBtn.setAttribute('aria-expanded', 'false');
     drawer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('drawer-open');
     document.body.style.overflow = '';
   };
 
+  const toggleMenu = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const isOpen = drawer.classList.contains('open');
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  };
+
+  // 1. Hamburger button toggles menu (CLOSED -> click -> OPEN, OPEN -> click -> CLOSED)
   menuBtn.addEventListener('click', toggleMenu);
 
+  // 2. Dedicated close button inside drawer header
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMenu();
+    });
+  }
+
+  // 3. Navigation links: close menu only when an item is explicitly clicked to navigate
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       closeMenu();
     });
   });
 
-  // Close when clicking outside (only on genuine, trusted user interaction)
-  document.addEventListener('click', (e) => {
-    if (!e.isTrusted) return; // Prevent any programmatic / synthetic clicks from closing drawer
-    if (drawer.classList.contains('open') && !drawer.contains(e.target) && !menuBtn.contains(e.target)) {
-      closeMenu();
-    }
-  });
-
-  // Close on Escape key
+  // 4. Keyboard accessibility: close on Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && drawer.classList.contains('open')) {
       closeMenu();
     }
   });
+
+  // Strict Rule: NO automatic timeouts, NO outside-click auto-dismissal, NO delayed state resets.
+  // The menu remains open indefinitely until the user explicitly closes it.
 }
 
 /* ========================================================
@@ -371,9 +383,10 @@ function initHeroFeedTicker() {
     { booth: 'Ward 12 In-charge', text: 'Voter rally live video streamed (18k views)', time: '7m ago' }
   ];
 
-  let feedIdx = 0;
+  const drawer = document.getElementById('mobileDrawer');
 
   setInterval(() => {
+    if (drawer && drawer.classList.contains('open')) return;
     const itemData = extraFeedItems[feedIdx];
     feedIdx = (feedIdx + 1) % extraFeedItems.length;
 
