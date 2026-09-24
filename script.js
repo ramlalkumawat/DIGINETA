@@ -46,7 +46,8 @@ function initMobileDrawer() {
 
   if (!menuBtn || !drawer) return;
 
-  const toggleMenu = () => {
+  const toggleMenu = (e) => {
+    if (e) e.stopPropagation();
     const isOpen = drawer.classList.contains('open');
     if (isOpen) {
       closeMenu();
@@ -79,8 +80,9 @@ function initMobileDrawer() {
     });
   });
 
-  // Close when clicking outside
+  // Close when clicking outside (only on genuine, trusted user interaction)
   document.addEventListener('click', (e) => {
+    if (!e.isTrusted) return; // Prevent any programmatic / synthetic clicks from closing drawer
     if (drawer.classList.contains('open') && !drawer.contains(e.target) && !menuBtn.contains(e.target)) {
       closeMenu();
     }
@@ -180,31 +182,37 @@ function initChunavSetuDemo() {
     }
   };
 
+  window.updateChunavSetuWard = (btn) => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const wardKey = btn.getAttribute('data-ward') || 'all';
+    const data = wardData[wardKey];
+    if (!data) return;
+
+    // Animate updates
+    saasVoters.textContent = data.voters;
+    saasVolunteers.textContent = data.volunteers;
+    saasBooths.textContent = data.booths;
+    saasHealth.textContent = data.health;
+
+    // Render table rows
+    tableBody.innerHTML = data.rows.map(row => `
+      <tr>
+        <td><strong>${row.booth}</strong></td>
+        <td>${row.loc}</td>
+        <td>${row.incharge}</td>
+        <td>${row.voters}</td>
+        <td><span class="status-pill ${row.type === 'ready' ? 'status-ready' : 'status-progress'}">${row.status}</span></td>
+      </tr>
+    `).join('');
+  };
+
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const wardKey = btn.getAttribute('data-ward') || 'all';
-      const data = wardData[wardKey];
-      if (!data) return;
-
-      // Animate updates
-      saasVoters.textContent = data.voters;
-      saasVolunteers.textContent = data.volunteers;
-      saasBooths.textContent = data.booths;
-      saasHealth.textContent = data.health;
-
-      // Render table rows
-      tableBody.innerHTML = data.rows.map(row => `
-        <tr>
-          <td><strong>${row.booth}</strong></td>
-          <td>${row.loc}</td>
-          <td>${row.incharge}</td>
-          <td>${row.voters}</td>
-          <td><span class="status-pill ${row.type === 'ready' ? 'status-ready' : 'status-progress'}">${row.status}</span></td>
-        </tr>
-      `).join('');
+      if (typeof window.updateChunavSetuWard === 'function') {
+        window.updateChunavSetuWard(btn);
+      }
     });
   });
 }
@@ -298,12 +306,17 @@ function initChunavSetuAutoCycle() {
   let isUserInteracting = false;
   let resumeTimeout = null;
 
+  const drawer = document.getElementById('mobileDrawer');
+
   const cycleNext = () => {
     if (isUserInteracting) return;
+    // Do not cycle while mobile drawer is open
+    if (drawer && drawer.classList.contains('open')) return;
+
     currentBtnIdx = (currentBtnIdx + 1) % filterBtns.length;
     const targetBtn = filterBtns[currentBtnIdx];
-    if (targetBtn) {
-      targetBtn.click();
+    if (targetBtn && typeof window.updateChunavSetuWard === 'function') {
+      window.updateChunavSetuWard(targetBtn);
     }
   };
 
